@@ -11,7 +11,7 @@ describe "Static pages" do
 
     it "should have the title 'Home'" do
       visit '/static_pages/home'
-      expect(page.title).to eql "Ruby on Rails Tutorial Sample App | Home"
+      expect(page.title).to eql "Ruby on Rails Tutorial Sample App"
     end
   end
 

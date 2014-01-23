@@ -1,4 +1,6 @@
 DemoApp::Application.routes.draw do
+  resources :users
+
   get '/home'   , to: "static_pages#home"
   get '/help'   , to: "static_pages#help"
   get '/about'  , to: "static_pages#about"

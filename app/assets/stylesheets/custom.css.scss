@@ -35,6 +35,14 @@ textarea {
   }
 }
 
+.alert.alert-notice {
+  @extend .alert-warning;
+}
+
+.alert.alert-error {
+  @extend .alert-danger;
+}
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -172,4 +180,19 @@ input {
 .field_with_errors {
   @extend .form-group;
   @extend .has-error;
+}
+
+/* Users index */
+
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $gray-light;
+    &:last-child {
+      border-bottom: 1px solid $gray-light;
+    }
+  }
 }

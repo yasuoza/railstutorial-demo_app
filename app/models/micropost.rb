@@ -4,11 +4,11 @@
 #
 #  id         :integer          not null, primary key
 #  content    :string(255)
-#  user_id_id :integer
+#  user_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
 #
 
 class Micropost < ActiveRecord::Base
-  belongs_to :user_id
+  belongs_to :user
 end

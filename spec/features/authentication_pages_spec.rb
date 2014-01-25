@@ -79,12 +79,12 @@ describe "Authentication" do
 
       describe "in the Relationships controller", type: :request do
         describe "submitting to the create action" do
-          before { post relationships_path }
+          before { post follow_user_path(1) }
           specify { expect(response).to redirect_to(signin_path) }
         end
 
         describe "submitting to the destroy action" do
-          before { delete relationship_path(1) }
+          before { delete follow_user_path(1) }
           specify { expect(response).to redirect_to(signin_path) }
         end
       end

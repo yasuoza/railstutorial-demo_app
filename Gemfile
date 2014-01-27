@@ -37,6 +37,9 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+# Use ActiveModel has_secure_password
+gem 'bcrypt-ruby', '~> 3.1.2'
+
 group :development do
   gem 'pry-rails'
   gem 'rspec-rails'
@@ -49,5 +52,3 @@ group :test do
   gem 'factory_girl_rails'
 end
 
-# Use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.1.2'

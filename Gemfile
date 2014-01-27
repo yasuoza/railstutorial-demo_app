@@ -40,15 +40,13 @@ end
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'
 
-group :development do
+group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'annotate'
   gem 'faker'
-end
-
-group :test do
+  gem 'spring'#, github: 'rails/spring'
+  gem 'spring-commands-rspec'
   gem 'capybara'
   gem 'factory_girl_rails'
 end
-

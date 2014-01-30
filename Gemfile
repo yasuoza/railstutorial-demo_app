@@ -45,7 +45,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'annotate'
   gem 'faker'
-  gem 'spring'#, github: 'rails/spring'
+  gem 'spring'
   gem 'spring-commands-rspec'
   gem 'capybara'
   gem 'factory_girl_rails'

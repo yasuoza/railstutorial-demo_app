@@ -1,0 +1,11 @@
+language: ruby
+rvm:
+  - 2.0.0
+  - 2.1.0
+
+before_script:
+ - mysql -e 'create database railstutorial_test;'
+
+script:
+  - RAILS_ENV=test bundle exec rake --trace db:migrate
+  - bundle exec rake

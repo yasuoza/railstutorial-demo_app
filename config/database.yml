@@ -1,6 +1,6 @@
 development: &base
   adapter: mysql2
-  username: yasuoza
+  username: rails
   database: railstutorial_dev
   pool: 5
   timeout: 5000

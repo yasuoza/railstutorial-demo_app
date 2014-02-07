@@ -4,7 +4,7 @@ rvm:
   - 2.1.0
 
 before_script:
- - mysql -e 'create database railstutorial_test;'
+  - mysql --user=yasuoza -e 'CREATE DATABASE railstutorial_test DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_unicode_ci;'
 
 script:
   - RAILS_ENV=test bundle exec rake --trace db:migrate

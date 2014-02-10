@@ -11,43 +11,43 @@ namespace :ci do
     desc "Create databases for ci"
     task :create => [:test_environment, 'db:load_config'] do
       begin
-        ar_configuration = ActiveRecord::Base.configurations['test']['database'].dup
+        orig_database = ActiveRecord::Base.configurations['test']['database'].dup
         DATABASE_NUM.to_i.times do |num|
-          ActiveRecord::Base.configurations['test']['database'] << num.to_s
+          ActiveRecord::Base.configurations['test']['database'] = orig_database + (num+1).to_s
           Rake::Task['db:create'].invoke
           Rake::Task['db:create'].reenable
         end
       ensure
-        ActiveRecord::Base.configurations['test']['database'] = ar_configuration
+        ActiveRecord::Base.configurations['test']['database'] = orig_database
       end
     end
 
     desc "Drop databases for ci"
     task :drop => [:test_environment, 'db:load_config'] do
       begin
-        ar_configuration = ActiveRecord::Base.configurations['test']['database'].dup
+        orig_database = ActiveRecord::Base.configurations['test']['database'].dup
         DATABASE_NUM.to_i.times do |num|
-          ActiveRecord::Base.configurations['test']['database'] << num.to_s
+          ActiveRecord::Base.configurations['test']['database'] = orig_database + (num+1).to_s
           Rake::Task['db:drop'].invoke
           Rake::Task['db:drop'].reenable
         end
       ensure
-        ActiveRecord::Base.configurations['test']['database'] = ar_configuration
+        ActiveRecord::Base.configurations['test']['database'] = orig_database
       end
     end
 
     desc "Migrate databases for ci"
     task :migrate => [:test_environment, 'db:load_config'] do
       begin
-        ar_configuration = ActiveRecord::Base.configurations['test']['database'].dup
+        orig_database = ActiveRecord::Base.configurations['test']['database'].dup
         DATABASE_NUM.to_i.times do |num|
-          ActiveRecord::Base.configurations['test']['database'] << num.to_s
+          ActiveRecord::Base.configurations['test']['database'] = orig_database + (num+1).to_s
           ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations[Rails.env])
           Rake::Task['db:migrate'].invoke
           Rake::Task['db:migrate'].reenable
         end
       ensure
-        ActiveRecord::Base.configurations['test']['database'] = ar_configuration
+        ActiveRecord::Base.configurations['test']['database'] = orig_database
       end
     end
 

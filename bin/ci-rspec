@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+require 'pathname'
+ENV['BUNDLE_GEMFILE'] ||= File.expand_path("../../Gemfile",
+  Pathname.new(__FILE__).realpath)
+
+require 'rubygems'
+require 'bundler/setup'
+
+require 'test_queue'
+require 'test_queue/runner/rspec'
+
+class RSpecCIRunner < TestQueue::Runner::RSpec
+  def after_fork(num)
+    ActiveRecord::Base.configurations['test']['database'] << num.to_s
+    ActiveRecord::Base.establish_connection(:test)
+  end
+end
+
+RSpecCIRunner.new.execute

@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'bundler/setup'
+
+require 'test_queue'
+begin
+  require 'minitest'
+  require 'test_queue/runner/minitest5'
+rescue LoadError => e
+  require 'minitest/unit'
+  require 'test_queue/runner/minitest'
+end
+
+class CustomMiniTestRunner < TestQueue::Runner::MiniTest
+  def after_fork(num)
+    ActiveRecord::Base.configurations['test']['database'] << num.to_s
+    ActiveRecord::Base.establish_connection(:test)
+  end
+end
+
+$:<< File.expand_path('../../test', __FILE__)
+ARGV.each{ |f| require(f) }
+CustomMiniTestRunner.new.execute

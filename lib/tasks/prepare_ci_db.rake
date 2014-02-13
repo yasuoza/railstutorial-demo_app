@@ -13,7 +13,7 @@ namespace :ci do
       begin
         orig_database = ActiveRecord::Base.configurations['test']['database'].dup
         DATABASE_NUM.to_i.times do |num|
-          ActiveRecord::Base.configurations['test']['database'] = orig_database + (num+1).to_s
+          ActiveRecord::Base.configurations['test']['database'] = num.zero? ? orig_database : orig_database + num.to_s
           Rake::Task['db:create'].invoke
           Rake::Task['db:create'].reenable
         end
@@ -27,7 +27,7 @@ namespace :ci do
       begin
         orig_database = ActiveRecord::Base.configurations['test']['database'].dup
         DATABASE_NUM.to_i.times do |num|
-          ActiveRecord::Base.configurations['test']['database'] = orig_database + (num+1).to_s
+          ActiveRecord::Base.configurations['test']['database'] = num.zero? ? orig_database : orig_database + num.to_s
           Rake::Task['db:drop'].invoke
           Rake::Task['db:drop'].reenable
         end
@@ -41,7 +41,7 @@ namespace :ci do
       begin
         orig_database = ActiveRecord::Base.configurations['test']['database'].dup
         DATABASE_NUM.to_i.times do |num|
-          ActiveRecord::Base.configurations['test']['database'] = orig_database + (num+1).to_s
+          ActiveRecord::Base.configurations['test']['database'] = num.zero? ? orig_database : orig_database + num.to_s
           ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations[Rails.env])
           Rake::Task['db:migrate'].invoke
           Rake::Task['db:migrate'].reenable

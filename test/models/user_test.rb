@@ -116,6 +116,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "micopost assciations' status" do
+    @user.save
     older_micropost = FactoryGirl.create(:micropost, user: @user, created_at: 1.day.ago)
     newer_micropost = FactoryGirl.create(:micropost, user: @user, created_at: 1.hour.ago)
     unfollowed_post = FactoryGirl.create(:micropost, user: FactoryGirl.create(:user))

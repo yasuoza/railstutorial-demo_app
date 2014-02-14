@@ -48,9 +48,6 @@ group :development, :test do
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'test-queue'
-end
-
-group :test do
-  gem 'capybara'
   gem 'factory_girl_rails'
+  gem 'capybara'
 end

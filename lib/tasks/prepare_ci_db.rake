@@ -8,7 +8,7 @@ namespace :ci do
   end
 
   namespace :db do
-    desc "Create databases for ci"
+    desc "Create CI_DATABASE_NUM databases for ci. Default CI_DATABASE_NUM=2"
     task :create => [:test_environment, 'db:load_config'] do
       begin
         orig_database = ActiveRecord::Base.configurations['test']['database'].dup
@@ -22,7 +22,7 @@ namespace :ci do
       end
     end
 
-    desc "Drop databases for ci"
+    desc "Drop CI_DATABASE_NUM databases for ci. Default CI_DATABASE_NUM=2"
     task :drop => [:test_environment, 'db:load_config'] do
       begin
         orig_database = ActiveRecord::Base.configurations['test']['database'].dup
@@ -36,7 +36,7 @@ namespace :ci do
       end
     end
 
-    desc "Migrate databases for ci"
+    desc "Migrate CI_DATABASE_NUM databases for ci. Default CI_DATABASE_NUM=2"
     task :migrate => [:test_environment, 'db:load_config'] do
       begin
         orig_database = ActiveRecord::Base.configurations['test']['database'].dup
@@ -51,10 +51,10 @@ namespace :ci do
       end
     end
 
-    desc "Setup databases for ci"
+    desc "Setup CI_DATABASE_NUM databases for ci. Default CI_DATABASE_NUM=2"
     task :setup => [:create, :migrate]
 
-    desc "Reset databases for ci"
+    desc "Reset CI_DATABASE_NUM databases for ci. Default CI_DATABASE_NUM=2"
     task :reset => [:drop, :create, :migrate]
   end
 end

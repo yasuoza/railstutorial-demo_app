@@ -1,6 +1,14 @@
 require 'active_record'
 
-DATABASE_NUM = ENV['CI_DATABASE_NUM'] || 2
+DATABASE_NUM = if ENV['CI_DATABASE_NUM']
+                 ENV['CI_DATABASE_NUM']
+               elsif File.exists?('/proc/cpuinfo')
+                 File.read('/proc/cpuinfo').split("\n").grep(/processor/).size
+               elsif RUBY_PLATFORM =~ /darwin/
+                 `/usr/sbin/sysctl -n hw.activecpu`.to_i
+               else
+                 2
+               end
 
 namespace :ci do
   task :test_environment => :environment do

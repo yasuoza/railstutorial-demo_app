@@ -47,7 +47,7 @@ group :development, :test do
   gem 'faker'
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'test-queue'
+  gem 'test-queue', github: 'yasuoza/test-queue', branch: 'minitest5'
   gem 'factory_girl_rails'
   gem 'capybara'
 end

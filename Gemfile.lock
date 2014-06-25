@@ -189,7 +189,7 @@ DEPENDENCIES
   mysql2
   pry-rails
   rails (= 4.1.1)
-  rspec-rails
+  rspec-rails (~> 3.0.0)
   sass-rails (~> 4.0.0)
   sdoc
   spring

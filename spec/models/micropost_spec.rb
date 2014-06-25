@@ -9,7 +9,7 @@
 #  updated_at :datetime
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Micropost do
 
@@ -21,7 +21,7 @@ describe Micropost do
   it { should respond_to(:content) }
   it { should respond_to(:user_id) }
   it { should respond_to(:user) }
-  its(:user) { should eq user }
+  it { expect(subject.user).to eq user }
 
   it { should be_valid }
 

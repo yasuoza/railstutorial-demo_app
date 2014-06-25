@@ -12,7 +12,7 @@
 #  admin           :boolean          default(FALSE)
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe User do
 
@@ -42,7 +42,7 @@ describe User do
   it { should respond_to(:followers) }
 
   it { should be_valid }
-  it { should_not be_admin }
+  it { expect(subject).not_to be_admin }
 
   describe "with admin attribute set to 'true'" do
     before do
@@ -55,17 +55,17 @@ describe User do
 
   describe "when name is not present" do
     before { @user.name = " " }
-    it { should_not be_valid }
+    it { expect(subject).not_to be_valid }
   end
 
   describe "when email is not present" do
     before { @user.email = " " }
-    it { should_not be_valid }
+    it { expect(subject).not_to be_valid }
   end
 
   describe "when name is too long" do
     before { @user.name = "a" * 51 }
-    it { should_not be_valid }
+    it { expect(subject).not_to be_valid }
   end
 
   describe "when email format is invalid" do
@@ -74,7 +74,7 @@ describe User do
                      foo@bar_baz.com foo@bar+baz.com]
       addresses.each do |invalid_address|
         @user.email = invalid_address
-        @user.should_not be_valid
+        expect(@user).not_to be_valid
       end
     end
   end
@@ -84,7 +84,7 @@ describe User do
       addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
       addresses.each do |valid_address|
         @user.email = valid_address
-        @user.should be_valid
+        expect(@user).to be_valid
       end
     end
   end
@@ -95,7 +95,7 @@ describe User do
       user_with_same_email.save
     end
 
-    it { should_not be_valid }
+    it { expect(subject).not_to be_valid }
   end
 
   describe "when email address is already taken" do
@@ -105,7 +105,7 @@ describe User do
       user_with_same_email.save
     end
 
-    it { should_not be_valid }
+    it { expect(subject).not_to be_valid }
   end
 
   describe "with a password that's too short" do
@@ -124,8 +124,8 @@ describe User do
     describe "with invalid password" do
       let(:user_for_invalid_password) { found_user.authenticate("invalid") }
 
-      it { should_not == user_for_invalid_password }
-      specify { user_for_invalid_password.should be_false }
+      it { expect(subject).not_to eq user_for_invalid_password }
+      it { expect(user_for_invalid_password).to be false }
     end
   end
 
@@ -162,9 +162,9 @@ describe User do
         FactoryGirl.create(:micropost, user: FactoryGirl.create(:user))
       end
 
-      its(:feed) { should include(newer_micropost) }
-      its(:feed) { should include(older_micropost) }
-      its(:feed) { should_not include(unfollowed_post) }
+      it { expect(subject.feed).to include(newer_micropost) }
+      it { expect(subject.feed).to include(older_micropost) }
+      it { expect(subject.feed).not_to include(unfollowed_post) }
     end
 
     describe "status" do
@@ -178,14 +178,14 @@ describe User do
         3.times { followed_user.microposts.create!(content: "Lorem ipsum") }
       end
 
-      its(:feed) { should include(newer_micropost) }
-      its(:feed) { should include(older_micropost) }
-      its(:feed) { should_not include(unfollowed_post) }
-      its(:feed) do
+      it { expect(subject.feed).to include(newer_micropost) }
+      it { expect(subject.feed).to include(older_micropost) }
+      it { expect(subject.feed).not_to include(unfollowed_post) }
+      it {
         followed_user.microposts.each do |micropost|
-          should include(micropost)
+          expect(subject.feed).to include(micropost)
         end
-      end
+      }
     end
   end
 
@@ -197,18 +197,18 @@ describe User do
     end
 
     it { should be_following(other_user) }
-    its(:followed_users) { should include(other_user) }
+    it { expect(subject.followed_users).to include(other_user) }
 
     describe "followed user" do
       subject { other_user }
-      its(:followers) { should include(@user) }
+      it { expect(subject.followers).to include(@user) }
     end
 
     describe "and unfollowing" do
       before { @user.unfollow!(other_user) }
 
-      it { should_not be_following(other_user) }
-      its(:followed_users) { should_not include(other_user) }
+      it { expect(subject).not_to be_following(other_user) }
+      it { expect(subject.followed_users).not_to include(other_user) }
     end
   end
 end

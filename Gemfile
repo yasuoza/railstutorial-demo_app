@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.1'
+gem 'rails', '4.1.2'
 
 # Use mysql2 as the database for Active Record
 gem 'mysql2'
@@ -47,7 +47,7 @@ group :development, :test do
   gem 'faker'
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'test-queue', github: 'yasuoza/test-queue', branch: 'minitest5'
+  gem 'test-queue', github: 'yasuoza/test-queue'
   gem 'factory_girl_rails'
   gem 'database_rewinder'
   gem 'capybara'

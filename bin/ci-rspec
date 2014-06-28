@@ -11,7 +11,7 @@ require 'test_queue/runner/rspec'
 
 class RSpecCIRunner < TestQueue::Runner::RSpec
   def after_fork(num)
-    ActiveRecord::Base.configurations['test']['database'] << num.to_s
+    ActiveRecord::Base.configurations['test']['database'] << (num - 1).nonzero?.to_s
     ActiveRecord::Base.establish_connection(:test)
   end
 end

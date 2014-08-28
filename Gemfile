@@ -40,6 +40,8 @@ end
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.2'
 
+gem 'unicorn'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.0.0'

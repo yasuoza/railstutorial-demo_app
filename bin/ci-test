@@ -16,5 +16,5 @@ class CustomMiniTestRunner < TestQueue::Runner::MiniTest
 end
 
 $:<< File.expand_path('../test', __dir__)
-ARGV.each{ |f| require(f) }
+ARGV.each {|f| require(f) }
 CustomMiniTestRunner.new.execute

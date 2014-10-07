@@ -6,15 +6,10 @@ rvm:
 before_install:
   - travis_retry gem install bundler
 
-before_script:
-  - mysql -e 'CREATE DATABASE railstutorial_test'
-  - mysqladmin --user=rails -f drop railstutorial_test
-  - mysql --user=rails -e 'CREATE DATABASE railstutorial_test DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_unicode_ci'
-
 script:
-  - RAILS_ENV=test bundle exec rake --trace db:migrate
-  - bundle exec rake
-  - bundle exec rake test
+  - bundle exec rake ci:db:setup
+  - ./bin/ci-test ./test/**/*_test.rb
+  - bundle exec ./bin/ci-rspec spec
 
 bundler_args: --path vendor/bundle --without test --jobs 8
 

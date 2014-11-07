@@ -42,6 +42,9 @@ gem 'bcrypt', '~> 3.1.2'
 
 gem 'unicorn'
 
+# Faster string escape
+gem 'escape_utils'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.1.0'
@@ -49,7 +52,7 @@ group :development, :test do
   gem 'faker'
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'test-queue', github: 'yasuoza/test-queue'
+  gem 'test-queue', github: 'tmm1/test-queue'
   gem 'factory_girl_rails'
   gem 'database_rewinder'
   gem 'capybara'

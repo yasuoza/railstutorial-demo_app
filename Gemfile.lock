@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/yasuoza/test-queue.git
-  revision: 14fbc158e244b3dbc02a3cc5d7b53ef61a43639e
+  remote: git://github.com/tmm1/test-queue.git
+  revision: 74941e5ffce42f6c0f8969fcc3175da43e51cca0
   specs:
     test-queue (0.2.9)
 

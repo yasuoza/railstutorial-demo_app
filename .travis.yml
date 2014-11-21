@@ -9,8 +9,10 @@ before_install:
 
 script:
   - bundle exec rake ci:db:setup
+  - bundle exec rake
+  - ./bin/ci-rspec spec
+  - bundle exec rake test
   - ./bin/ci-test ./test/**/*_test.rb
-  - bundle exec ./bin/ci-rspec spec
 
 bundler_args: --path vendor/bundle --without test --jobs 8
 

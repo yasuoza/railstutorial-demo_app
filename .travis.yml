@@ -5,6 +5,7 @@ rvm:
 
 before_install:
   - travis_retry gem install bundler
+  - export DISABLE_SPRING=1
 
 script:
   - bundle exec rake ci:db:setup
